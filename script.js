@@ -17,18 +17,16 @@ const dailyPeriods = {
     F: [4, 1, 2, "Lunch", 6, 7],
     G: [3, 4, 7, "Lunch", 5, 6]
 };
-// Select Day from Dropdown
+// choose day here
 btn.on("click", () => {
     var selectedDay = $('#dayInput').val();
     $.ajax({
       url: `https://api.npoint.io/c59df1063adbe3c5c5e0`,
       method: "GET",
       success: (data) => {
-// Access jSon and pull each individual class and put it to the write day
         const schedule = data.schedule; 
         const daySchedule = dailyPeriods[selectedDay];
         $('#scheduleList').empty();
-        let bellIndex = 1;
         daySchedule.forEach((period) => {
             if (period === "Lunch") {
             const Lunch = bellSchedule.lunch;
@@ -59,9 +57,6 @@ btn.on("click", () => {
             }
           }
         });
-      },
-      error: () => {
-        console.log("We connected to the server, but it returned an error.");
       },
     });
 });
